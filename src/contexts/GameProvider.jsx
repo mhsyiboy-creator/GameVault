@@ -86,6 +86,10 @@ export function GameProvider({ children }) {
     setGames((current) => current.filter((game) => game.id !== id))
   }, [])
 
+  const restoreGames = useCallback((newGames) => {
+    setGames(Array.isArray(newGames) ? newGames : [])
+  }, [])
+
   const getGameById = useCallback(
     (id) => games.find((game) => game.id === id),
     [games]
@@ -101,12 +105,13 @@ export function GameProvider({ children }) {
       addGame,
       updateGame,
       removeGame,
+      restoreGames,
       getGameById,
       setTheme: setThemeState,
       setLocale: setLocaleState,
       setPalette: setPaletteState,
     }),
-    [games, theme, locale, palette, t, addGame, updateGame, removeGame, getGameById]
+    [games, theme, locale, palette, t, addGame, updateGame, removeGame, restoreGames, getGameById]
   )
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>

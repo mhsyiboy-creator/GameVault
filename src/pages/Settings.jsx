@@ -1,8 +1,9 @@
 import { COLOR_PALETTES } from '../utils/constants'
+import BackupPanel from '../components/BackupPanel'
 import { useGameStore } from '../contexts/GameContext'
 
 export default function Settings() {
-  const { theme, locale, palette, setTheme, setLocale, setPalette, t } = useGameStore()
+  const { games, theme, locale, palette, restoreGames, setTheme, setLocale, setPalette, t } = useGameStore()
 
   return (
     <div className="space-y-8">
@@ -86,6 +87,7 @@ export default function Settings() {
         <h3 className="text-lg font-semibold text-[var(--text-primary)]">{t('settings.aboutTitle')}</h3>
         <p className="mt-3 text-[var(--text-secondary)] leading-7">{t('settings.aboutDescription')}</p>
       </div>
+      <BackupPanel games={games} onRestore={restoreGames} />
     </div>
   )
 }
